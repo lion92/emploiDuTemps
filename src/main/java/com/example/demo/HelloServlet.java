@@ -1,7 +1,5 @@
 package com.example.demo;
 
-import model.SerializeJaxb;
-
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +27,8 @@ public class HelloServlet extends HttpServlet {
             out.println("<h1>" + SerializeJaxb.readXml() +"</h1>");
             out.println("</body></html>");
         } catch (JAXBException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

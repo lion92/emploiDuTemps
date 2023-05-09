@@ -1,4 +1,10 @@
-package model;
+package com.example.demo;
+
+import model.Cours;
+import model.Matiere;
+import model.Planning;
+import model.Scheduled;
+
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -6,37 +12,42 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SerializeJaxb {
     public SerializeJaxb() {
     }
 
     public static void main(String[] args) throws JAXBException {
-        createXmlByUsingObject();
-       // readXml();
+       createXmlByUsingObject(null, null, new Cours(new Matiere("kriss","jjd"), new Scheduled(1)));
 
 
     }
 
-    public static String readXml() throws JAXBException {
-        File file=new File("C:\\Users\\kriss\\IdeaProjects\\demo\\src\\main\\resources\\planning.xml");
+    public static Planning readXml() throws Exception {
+
+        File file=new File("C:\\Users\\kriss\\IdeaProjects\\demo\\src\\main\\resources\\testtest.xml");
         JAXBContext jaxbContext=JAXBContext.newInstance(Planning.class);
         Unmarshaller unmarshaller=jaxbContext.createUnmarshaller();
         Planning planning=(Planning) unmarshaller.unmarshal(file);
         System.out.println(planning.toString());
-        return planning.toString();
+        return planning;
     }
 
-    public static void createXmlByUsingObject() {
+    public static void createXmlByUsingObject(Planning planning, List<Cours> listCour, Cours cours) {
         try {
+            if(planning==null){
+                planning=new Planning();
+            }
+            if(listCour==null){
+                listCour=new ArrayList<>();
+            }
 
-            Planning planning=new Planning();
-            ArrayList<Cours> listCour=new ArrayList<Cours>();
-            listCour.add(new Cours(new Matiere("math","kriss"), new Scheduled(1)));
+            listCour.add(cours);
             planning.setCours(listCour);
             JAXBContext jaxbContext1=JAXBContext.newInstance(Planning.class);
             Marshaller marshaller=jaxbContext1.createMarshaller();
-            marshaller.marshal(planning, new File("C:\\Users\\kriss\\IdeaProjects\\demo\\src\\main\\resources\\planning.xml"));
+            marshaller.marshal(planning, new File("C:\\Users\\kriss\\IdeaProjects\\demo\\src\\main\\resources\\testtest.xml"));
             marshaller.marshal(planning, System.out);
 
         } catch (JAXBException e) {

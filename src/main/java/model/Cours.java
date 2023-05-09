@@ -14,9 +14,9 @@ public class Cours {
 	public Cours() {
 	}
 
-	public Cours(Matiere math, Scheduled planif) {
+	public Cours(Matiere math, Scheduled horraire) {
 		matiere = math;
-		horaire =planif;
+		horaire =horraire;
 	}
 	  @XmlElement
 	private Matiere matiere;
@@ -42,5 +42,21 @@ public class Cours {
 				"matiere=" + matiere.toString() +
 				", horaire=" + horaire.toString() +
 				'}';
+	}
+
+	public Matiere getMatiere() {
+		return matiere;
+	}
+
+	public void setMatiere(Matiere matiere) {
+		this.matiere = matiere;
+	}
+
+	public Scheduled getHoraire() {
+		return horaire;
+	}
+
+	public void setHoraire(Scheduled horaire) {
+		this.horaire = horaire;
 	}
 }

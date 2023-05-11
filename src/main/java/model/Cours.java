@@ -11,37 +11,47 @@ import java.util.Objects;
 // @XmlType(propOrder = {"price", "name"})
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Cours {
+
+
 	public Cours() {
+	}
+
+	public Cours(int id, Matiere matiere, Scheduled horaire) {
+		this.id = id;
+		this.matiere = matiere;
+		this.horaire = horaire;
 	}
 
 	public Cours(Matiere math, Scheduled horraire) {
 		matiere = math;
 		horaire =horraire;
 	}
+	@XmlElement
+	private int id;
 	  @XmlElement
 	private Matiere matiere;
 	  @XmlElement
 	private Scheduled horaire;
+
+	public int getId() {
+		return id;
+	}
 
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		Cours cours = (Cours) o;
-		return Objects.equals(matiere, cours.matiere) && Objects.equals(horaire, cours.horaire);
+		return id == cours.id && Objects.equals(matiere, cours.matiere) && Objects.equals(horaire, cours.horaire);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(matiere, horaire);
+		return Objects.hash(id, matiere, horaire);
 	}
 
-	@Override
-	public String toString() {
-		return "Cours{" +
-				"matiere=" + matiere.toString() +
-				", horaire=" + horaire.toString() +
-				'}';
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Matiere getMatiere() {
@@ -58,5 +68,14 @@ public class Cours {
 
 	public void setHoraire(Scheduled horaire) {
 		this.horaire = horaire;
+	}
+
+	@Override
+	public String toString() {
+		return "Cours{" +
+				"id=" + id +
+				", matiere=" + matiere +
+				", horaire=" + horaire +
+				'}';
 	}
 }

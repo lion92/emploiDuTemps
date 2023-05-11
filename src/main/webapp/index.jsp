@@ -6,6 +6,8 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
+
+<h2>Emploi du temps</h2>
 <h1><%= "Hello World!" %>
 </h1>
 <h1> Student Registration Page</h1>
@@ -18,6 +20,9 @@ Professeur :<input type="text" name="prof">
     <br> <br>
 
     Matiere: <input type="text" name="matiereProf">
+    <br> <br>
+
+    jour: <input type="text" name="jour">
     <br> <br>
 
     <input type="submit" value="register">

@@ -19,7 +19,7 @@ public class SerializeJaxb {
     }
 
     public static void main(String[] args) throws JAXBException {
-       createXmlByUsingObject(null, null, new Cours(new Matiere("kriss","jjd"), new Scheduled(1)));
+       createXmlByUsingObject(null, null, new Cours(new Matiere(), new Scheduled()));
 
 
     }

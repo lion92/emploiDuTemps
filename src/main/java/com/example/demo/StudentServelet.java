@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 @WebServlet("/StudentServlet")
 public class StudentServelet extends HttpServlet {
@@ -22,21 +26,20 @@ public class StudentServelet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, IOException {
 
         String sheduled = req.getParameter("scheduled");
+        String jour=req.getParameter("jour");
         String prof = req.getParameter("prof");
         String matiereProf = req.getParameter("matiereProf");
-        Planning planning=SerializeJaxb.readXml();
-
-        SerializeJaxb.createXmlByUsingObject(planning, planning.getCours(), new Cours(new Matiere(matiereProf, prof), new Scheduled(Double.parseDouble(sheduled))));
-
-        Planning planningApresAjout=SerializeJaxb.readXml();
-        resp.setContentType("text/html");
-        PrintWriter printWriter = resp.getWriter();
-        printWriter.print("<html>");
-        printWriter.print("<body>");
-        printWriter.print("<h1>Emploi du temps actuelle</h1>");
-        planningApresAjout.getCours().forEach(cours ->printWriter.print("<div><p>"+cours.getMatiere()+"<p/>"+"<p>"+cours.getHoraire()+"<p/></div>"));
+        Planning planning = SerializeJaxb.readXml();
+        List<Cours> coursPrecedent = planning.getCours();
+        //je trouve le plus grand id de la liste et je rajoute 1 pour créer un nouveau cour
+        Collections.sort(coursPrecedent, Comparator.comparingInt(Cours::getId));
+        SerializeJaxb.createXmlByUsingObject(planning, planning.getCours(), new Cours(coursPrecedent.get(0).getId() + 1, new Matiere(matiereProf, prof), new Scheduled(Double.parseDouble(sheduled),jour)));
+        Planning planningResult = SerializeJaxb.readXml();
+        PrintWriter printWriter= resp.getWriter();
         printWriter.print("</body>");
         printWriter.print("<a href='/demo'>retour<a/>");
+        printWriter.print("<p>"+planningResult.toString()+"</p>");
+        printWriter.print("</body>");
         printWriter.print("</html>");
         printWriter.close();
 

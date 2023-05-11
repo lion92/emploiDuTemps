@@ -51,7 +51,7 @@ public class Planning {
 	@Override
 	public String toString() {
 		return "Planning{" +
-				"lesCours=" + lesCours.toString() +
+				"lesCours=" + lesCours +
 				'}';
 	}
 }

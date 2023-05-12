@@ -16,6 +16,7 @@ import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
@@ -46,47 +47,63 @@ public class StudentServelet extends HttpServlet {
         for(int debutCours=8; debutCours<18;debutCours++){
 
             int finalDebutCours = debutCours;
-            planningResult.getCours()
-                    .stream()
-                    .filter(cours -> cours.getHoraire().getJour().equals("Lundi"))
-                    .collect(Collectors.toList()).stream()
-                    .filter(cours -> cours.getHoraire().getHeureDebut()== finalDebutCours).collect(Collectors.toList()).forEach(cours -> tdLundi.updateAndGet(v -> v + "<td>"+cours.getMatiere()+"</td>"));
+            List<Optional<Optional<Cours>>> lundi = planningResult.getCours()
+                    .stream().map(Optional::ofNullable)
+                    .filter(cours -> cours.get().getHoraire().getJour().equals("Lundi")).map(Optional::ofNullable)
+                    .collect(Collectors.toList());
 
-            planningResult.getCours()
-                    .stream()
-                    .filter(cours -> cours.getHoraire().getJour().equals("Mardi"))
-                    .collect(Collectors.toList()).stream()
-                    .filter(cours -> cours.getHoraire().getHeureDebut()== finalDebutCours).collect(Collectors.toList()).forEach(cours -> tdMardi.updateAndGet(v -> v + "<td>"+cours.getMatiere()+"</td>"));
+                    lundi.stream().map(Optional::ofNullable)
+                    .filter(cours -> cours.get().get().get().getHoraire().heureDebut== finalDebutCours).collect(Collectors.toList())
+                            .forEach(cours -> tdLundi.updateAndGet(v -> v + "<td>"+cours.get().get().get().getMatiere()+"</td>"));
 
+            List<Optional<Optional<Cours>>> Mardi = planningResult.getCours()
+                    .stream().map(Optional::ofNullable)
+                    .filter(cours -> cours.get().getHoraire().getJour().equals("Mardi")).map(Optional::ofNullable)
+                    .collect(Collectors.toList());
 
-            planningResult.getCours()
-                    .stream()
-                    .filter(cours -> cours.getHoraire().getJour().equals("Mercrdi"))
-                    .collect(Collectors.toList()).stream()
-                    .filter(cours -> cours.getHoraire().getHeureDebut()== finalDebutCours).collect(Collectors.toList()).forEach(cours -> tdMercredi.updateAndGet(v -> v + "<td>"+cours.getMatiere()+"</td>"));
+            Mardi.stream().map(Optional::ofNullable)
+                    .filter(cours -> cours.get().get().get().getHoraire().heureDebut== finalDebutCours).collect(Collectors.toList())
+                    .forEach(cours -> tdMardi.updateAndGet(v -> v + "<td>"+cours.get().get().get().getMatiere()+"</td>"));
 
-            planningResult.getCours()
-                    .stream()
-                    .filter(cours -> cours.getHoraire().getJour().equals("Jeudi"))
-                    .collect(Collectors.toList()).stream()
-                    .filter(cours -> cours.getHoraire().getHeureDebut()== finalDebutCours).collect(Collectors.toList()).forEach(cours -> tdJeudi.updateAndGet(v -> v + "<td>"+cours.getMatiere()+"</td>"));
+            List<Optional<Optional<Cours>>> Mercredi = planningResult.getCours()
+                    .stream().map(Optional::ofNullable)
+                    .filter(cours -> cours.get().getHoraire().getJour().equals("Mercredi")).map(Optional::ofNullable)
+                    .collect(Collectors.toList());
 
-            planningResult.getCours()
-                    .stream()
-                    .filter(cours -> cours.getHoraire().getJour().equals("Vendredi"))
-                    .collect(Collectors.toList()).stream()
-                    .filter(cours -> cours.getHoraire().getHeureDebut()== finalDebutCours).collect(Collectors.toList()).forEach(cours -> tdVendredi.updateAndGet(v -> v + "<td>"+cours.getMatiere()+"</td>"));
-            planningResult.getCours()
-                    .stream()
-                    .filter(cours -> cours.getHoraire().getJour().equals("Samdedi"))
-                    .collect(Collectors.toList()).stream()
-                    .filter(cours -> cours.getHoraire().getHeureDebut()== finalDebutCours).collect(Collectors.toList()).forEach(cours -> tdSamedi.updateAndGet(v -> v + "<td>"+cours.getMatiere()+"</td>"));
-            planningResult.getCours()
-                    .stream()
-                    .filter(cours -> cours.getHoraire().getJour().equals("Dimanche"))
-                    .collect(Collectors.toList()).stream()
-                    .filter(cours -> cours.getHoraire().getHeureDebut()== finalDebutCours).collect(Collectors.toList()).forEach(cours -> tdDimanche.updateAndGet(v -> v + "<td>"+cours.getMatiere()+"</td>"));
+            Mercredi.stream().map(Optional::ofNullable)
+                    .filter(cours -> cours.get().get().get().getHoraire().heureDebut== finalDebutCours).collect(Collectors.toList())
+                    .forEach(cours -> tdMercredi.updateAndGet(v -> v + "<td>"+cours.get().get().get().getMatiere()+"</td>"));
+            List<Optional<Optional<Cours>>> Jeudi = planningResult.getCours()
+                    .stream().map(Optional::ofNullable)
+                    .filter(cours -> cours.get().getHoraire().getJour().equals("Jeudi")).map(Optional::ofNullable)
+                    .collect(Collectors.toList());
 
+            Jeudi.stream().map(Optional::ofNullable)
+                    .filter(cours -> cours.get().get().get().getHoraire().heureDebut== finalDebutCours).collect(Collectors.toList())
+                    .forEach(cours -> tdJeudi.updateAndGet(v -> v + "<td>"+cours.get().get().get().getMatiere()+"</td>"));
+            List<Optional<Optional<Cours>>> Vendredi = planningResult.getCours().stream().map(Optional::ofNullable)
+                    .filter(cours -> cours.get().getHoraire().getJour().equals("Vendredi")).map(Optional::ofNullable)
+                    .collect(Collectors.toList());
+
+            Vendredi.stream().map(Optional::ofNullable)
+                    .filter(cours -> cours.get().get().get().getHoraire().heureDebut== finalDebutCours).collect(Collectors.toList())
+                    .forEach(cours -> tdVendredi.updateAndGet(v -> v + "<td>"+cours.get().get().get().getMatiere()+"</td>"));
+         List<Optional<Optional<Cours>>> Samedi = planningResult.getCours()
+                    .stream().map(Optional::ofNullable)
+                    .filter(cours -> cours.get().getHoraire().getJour().equals("Samedi")).map(Optional::ofNullable)
+                    .collect(Collectors.toList());
+
+            Samedi.stream().map(Optional::ofNullable)
+                    .filter(cours -> cours.get().get().get().getHoraire().heureDebut== finalDebutCours).collect(Collectors.toList())
+                    .forEach(cours -> tdSamedi.updateAndGet(v -> v + "<td>"+cours.get().get().get().getMatiere()+"</td>"));
+            List<Optional<Optional<Cours>>>  Dimanche = planningResult.getCours()
+                    .stream().map(Optional::ofNullable)
+                    .filter(cours -> cours.get().getHoraire().getJour().equals("Dimanche")).map(Optional::ofNullable)
+                    .collect(Collectors.toList());
+
+            Dimanche.stream().map(Optional::ofNullable)
+                    .filter(cours -> cours.get().get().get().getHoraire().heureDebut== finalDebutCours).collect(Collectors.toList())
+                    .forEach(cours -> tdDimanche.updateAndGet(v -> v + "<td>"+cours.get().get().get().getMatiere()+"</td>"));
 
         }
         String jourlundi="";
@@ -173,66 +190,13 @@ public class StudentServelet extends HttpServlet {
                 "                <th> Dimanche </th>\n" +
                 "            </tr>\n" +
                 "            <tr>\n" +
-
-                "                <td> 9h </td>\n" +
-
-                "                <td class=\"français\"> Français </td>\n" +
-                "                <td class=\"EPS\"> EPS </td>\n" +
-                "                <td> Projet</td>\n" +
-                "                <td> Géométrie </td>\n" +
-                "                <td></td>\n" +
-                "                <td></td>\n" +
-                "                <td></td>\n" +
-                "            </tr>\n" +
-                "            <tr>\n" +
-                "                <td> 10h </td>\n" +
-                "                <td> Math </td>\n" +
-                "                <td> Français </td>\n" +
-                "                <td>Projet</td>\n" +
-                "                <td></td>\n" +
-                "                <td></td>\n" +
-                "                <td></td>\n" +
-                "                <td></td>\n" +
-                "            </tr>\n" +
-                "            <tr>\n" +
-                "                <td> 11h </td>\n" +
-                "                <td> Anglais </td>\n" +
-                "                <td> Perm </td>\n" +
-                "                <td>Projet</td>\n" +
-                "                <td></td>\n" +
-                "                <td></td>\n" +
-                "                <td></td>\n" +
-                "                <td></td>\n" +
-                "            </tr>\n" +
-                "            <tr>\n" +
-                "                <td> 12h </td>\n" +
-                "                <td class=\"pause\"> Déjeuner </td>\n" +
-                "                <td class=\"pause\"> Déjeuner </td>\n" +
-                "                <td class=\"pause\">  </td>\n" +
-                "                <td class=\"pause\"> Déjeuner </td>\n" +
-                "                <td class=\"pause\"> Déjeuner </td>\n" +
-                "                <td class=\"pause\"></td>\n" +
-                "                <td class=\"pause\"></td>\n" +
-                "            </tr>\n" +
-                "            <tr>\n" +
-                "                <td> 14h </td>\n" +
-                "                <td> Physique </td>\n" +
-                "                <td> NSI </td>\n" +
-                "                <td class=\"math\"> Algèbre </td>\n" +
-                "                <td></td>\n" +
-                "                <td></td>\n" +
-                "                <td></td>\n" +
-                "                <td></td>\n" +
-                "            </tr>\n" +
-                "            <tr>\n" +
-                "                <td> 16h </td>\n" +
-                "                <td> Techno </td>\n" +
-                "                <td> NSI </td>\n" +
-                "                <td></td>\n" +
-                "                <td></td>\n" +
-                "                <td></td>\n" +
-                "                <td></td>\n" +
-                "                <td></td>\n" +
+                jourlundi+
+                jourMardi+
+                jourMercredi+
+                jourJeudi+
+                jourVendredi+
+                jourSamedi+
+                jourDimanche+
                 "            </tr>\n" +
                 "        </table>\n" +
                 "    </div>\n" +

@@ -60,59 +60,59 @@ Professeur :<input type="text" name="prof">
                 <th> Dimanche </th>
             </tr>
             <tr>
-                <td> 9h </td>
-                <td class="français"> Français </td>
-                <td class="EPS"> EPS </td>
-                <td> Projet</td>
-                <td> Géométrie </td>
+                <td> </td>
+                <td class="français"></td>
+                <td class="EPS"> </td>
+                <td> </td>
+                <td> </td>
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
             <tr>
-                <td> 10h </td>
-                <td> Math </td>
-                <td> Français </td>
-                <td>Projet</td>
+                <td> </td>
+                <td>  </td>
+                <td>  </td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td> 11h </td>
-                <td> Anglais </td>
-                <td> Perm </td>
-                <td>Projet</td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
             <tr>
-                <td> 12h </td>
-                <td class="pause"> Déjeuner </td>
-                <td class="pause"> Déjeuner </td>
+                <td> </td>
+                <td>  </td>
+                <td> </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td class="pause"> </td>
+                <td class="pause"> </td>
                 <td class="pause">  </td>
-                <td class="pause"> Déjeuner </td>
-                <td class="pause"> Déjeuner </td>
+                <td class="pause"></td>
+                <td class="pause"> </td>
                 <td class="pause"></td>
                 <td class="pause"></td>
             </tr>
             <tr>
-                <td> 14h </td>
-                <td> Physique </td>
-                <td> NSI </td>
-                <td class="math"> Algèbre </td>
+                <td>  </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
             </tr>
             <tr>
-                <td> 16h </td>
-                <td> Techno </td>
-                <td> NSI </td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
                 <td></td>
                 <td></td>
                 <td></td>

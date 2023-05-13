@@ -65,37 +65,37 @@ public class UpdateServelet extends HttpServlet {
                                 String jourIterationActuel = horaireIterationActuelle.getJour();
                                 if (jourIterationActuel.equals("Lundi")) {
                                     if (horaireIterationActuelle.heureDebut == debutCours) {
-                                        tdLundi += "<div>" + "<span>" + "Id :" + coursIterationActuel.getId() + "Debut des cours :" + debutCours + "Lundi" + "</span>" + coursIterationActuel.getMatiere() + "</div>";
+                                        tdLundi = getString(tdLundi, debutCours, coursIterationActuel, "Lundi");
                                     }
                                 }
                                 if (jourIterationActuel.equals("Mardi")) {
                                     if (horaireIterationActuelle.heureDebut == debutCours) {
-                                        tdMardi += "<div>" + "<span>" + "Id :" + coursIterationActuel.getId() + "Debut des cours :" + debutCours + "Mardi" + "</span>" + coursIterationActuel.getMatiere() + "</div>";
+                                        tdMardi = getString(tdMardi, debutCours, coursIterationActuel, "Mardi");
                                     }
                                 }
                                 if (jourIterationActuel.equals("Mercredi")) {
                                     if (horaireIterationActuelle.heureDebut == debutCours) {
-                                        tdMercredi += "<div>" + "<span>" + "Id :" + coursIterationActuel.getId() + "Debut des cours :" + debutCours + "Mercredi" + "</span>" + coursIterationActuel.getMatiere() + "</div>";
+                                        tdMercredi = getString(tdMercredi, debutCours, coursIterationActuel, "Mercredi");
                                     }
                                 }
                                 if (jourIterationActuel.equals("Jeudi")) {
                                     if (horaireIterationActuelle.heureDebut == debutCours) {
-                                        tdJeudi += "<div>" + "<span>" + "Id :" + coursIterationActuel.getId() + "Debut des cours :" + debutCours + "Jeudi" + "</span>" + coursIterationActuel.getMatiere() + "</div>";
+                                        tdJeudi = getString(tdJeudi, debutCours, coursIterationActuel, "Jeudi");
                                     }
                                 }
                                 if (jourIterationActuel.equals("Vendredi")) {
                                     if (horaireIterationActuelle.heureDebut == debutCours) {
-                                        tdVendredi += "<div>" + "<span>" + "Id :" + coursIterationActuel.getId() + "Debut des cours :" + debutCours + "Vendredi" + "</span>" + coursIterationActuel.getMatiere() + "</div>";
+                                        tdVendredi = getString(tdVendredi, debutCours, coursIterationActuel, "Vendredi");
                                     }
                                 }
                                 if (jourIterationActuel.equals("Samedi")) {
                                     if (horaireIterationActuelle.heureDebut == debutCours) {
-                                        tdSamedi += "<div>" + "<span>" + "Id :" + coursIterationActuel.getId() + "Debut des cours :" + debutCours + "Samedi" + "</span>" + coursIterationActuel.getMatiere() + "</div>";
+                                        tdSamedi = getString(tdSamedi, debutCours, coursIterationActuel, "Samedi");
                                     }
                                 }
                                 if (jourIterationActuel.equals("Dimanche")) {
                                     if (horaireIterationActuelle.heureDebut == debutCours) {
-                                        tdDimanche += "<div>" + "<span>" + "Id :" + coursIterationActuel.getId() + "Debut des cours :" + debutCours + "Dimanche" + "</span>" + coursIterationActuel.getMatiere() + "</div>";
+                                        tdDimanche = getString(tdDimanche, debutCours, coursIterationActuel, "Dimanche");
                                     }
                                 }
 
@@ -109,6 +109,25 @@ public class UpdateServelet extends HttpServlet {
 
         }
 
+        String strplannig = getString(tdLundi, tdMardi, tdMercredi, tdJeudi, tdVendredi, tdSamedi, tdDimanche);
+
+
+        PrintWriter printWriter = resp.getWriter();
+        printWriter.print(strplannig);
+        printWriter.close();
+    }
+
+    private static String getString(String tdDimanche, int debutCours, Cours coursIterationActuel, String dimanche) {
+        tdDimanche += "<div>" + "<span>" + "Id :" + coursIterationActuel.getId() + "Debut des cours :" + debutCours + dimanche + "</span>" + coursIterationActuel.getMatiere() + "</div>";
+        return tdDimanche;
+    }
+
+    private static String getString(String tdLundi, String tdMardi, String tdMercredi, String tdJeudi, String tdVendredi, String tdSamedi, String tdDimanche) {
+        String strplannig = getStrplannig(tdLundi, tdMardi, tdMercredi, tdJeudi, tdVendredi, tdSamedi, tdDimanche);
+        return strplannig;
+    }
+
+    private static String getStrplannig(String tdLundi, String tdMardi, String tdMercredi, String tdJeudi, String tdVendredi, String tdSamedi, String tdDimanche) {
         String strplannig = "";
         strplannig +=
                 "<!DOCTYPE html>\n" +
@@ -126,19 +145,19 @@ public class UpdateServelet extends HttpServlet {
                         "\n" +
                         "\n" +
                         "\n" + "<div class=\"wrapper\">"
-                        + "<div class='retrait'>" + tdLundi + "</div>" +
+                        + "<div class='retrait'><h1>Lundi</h1>" + tdLundi + "</div>" +
 
-                        "<div class='retrait'>" + tdMardi + "</div>" +
+                        "<div class='retrait'><h1>Mardi</h1>" + tdMardi + "</div>" +
 
-                        "<div class='retrait'>" + tdMercredi + "</div>" +
+                        "<div class='retrait'><h1>Mercredi</h1>" + tdMercredi + "</div>" +
 
-                        "<div class='retrait'>" + tdJeudi + "</div>" +
+                        "<div class='retrait'><h1>Jeudi</h1>" + tdJeudi + "</div>" +
 
-                        "<div class='retrait'>" + tdVendredi + "</div>" +
+                        "<div class='retrait'><h1>Vendredi</h1>" + tdVendredi + "</div>" +
 
-                        "<div class='retrait'>" + tdSamedi + "</div>" +
+                        "<div class='retrait'><h1>Samedi</h1>" + tdSamedi + "</div>" +
 
-                        "<div class='retrait'>" + tdDimanche + "</div>" +
+                        "<div class='retrait'><h1>Dimanche</h1>" + tdDimanche + "</div>" +
                         "</div>" +
                         "    <style>\n" +
                         "        body {\n" +
@@ -212,10 +231,6 @@ public class UpdateServelet extends HttpServlet {
                         "    </style>\n" +
                         "</body>\n" +
                         "</html>";
-
-
-        PrintWriter printWriter = resp.getWriter();
-        printWriter.print(strplannig);
-        printWriter.close();
+        return strplannig;
     }
 }

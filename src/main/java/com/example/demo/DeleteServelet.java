@@ -45,7 +45,7 @@ public class DeleteServelet extends HttpServlet {
         String tdSamedi = "";
         String tdDimanche = "";
         List<Cours> cours1 = planningResult.getCours();
-        for (int debutCours = 8; debutCours < 18; debutCours++) {
+        for (int debutCours = 0; debutCours < 24; debutCours++) {
 
             if (cours1 != null) {
                 for (int cours = 0; cours < planning.getCours().size(); cours++) {
@@ -102,6 +102,15 @@ public class DeleteServelet extends HttpServlet {
 
         }
 
+        String strplannig = getString(tdLundi, tdMardi, tdMercredi, tdJeudi, tdVendredi, tdSamedi, tdDimanche);
+
+
+        PrintWriter printWriter = resp.getWriter();
+        printWriter.print(strplannig);
+        printWriter.close();
+    }
+
+    private static String getString(String tdLundi, String tdMardi, String tdMercredi, String tdJeudi, String tdVendredi, String tdSamedi, String tdDimanche) {
         String strplannig = "";
         strplannig +=
                 "<!DOCTYPE html>\n" +
@@ -119,19 +128,19 @@ public class DeleteServelet extends HttpServlet {
                         "\n" +
                         "\n" +
                         "\n" + "<div class=\"wrapper\">"
-                        + "<div class='retrait'>" + tdLundi + "</div>" +
+                        + "<div class='retrait'><h1>Lundi</h1>" + tdLundi + "</div>" +
 
-                        "<div class='retrait'>" + tdMardi + "</div>" +
+                        "<div class='retrait'><h1>Mardi</h1>" + tdMardi + "</div>" +
 
-                        "<div class='retrait'>" + tdMercredi + "</div>" +
+                        "<div class='retrait'><h1>Mercredi</h1>" + tdMercredi + "</div>" +
 
-                        "<div class='retrait'>" + tdJeudi + "</div>" +
+                        "<div class='retrait'><h1>Jeudi</h1>" + tdJeudi + "</div>" +
 
-                        "<div class='retrait'>" + tdVendredi + "</div>" +
+                        "<div class='retrait'><h1>Vendredi</h1>" + tdVendredi + "</div>" +
 
-                        "<div class='retrait'>" + tdSamedi + "</div>" +
+                        "<div class='retrait'><h1>Samedi</h1>" + tdSamedi + "</div>" +
 
-                        "<div class='retrait'>" + tdDimanche + "</div>" +
+                        "<div class='retrait'><h1>Dimanche</h1>" + tdDimanche + "</div>" +
                         "</div>" +
                         "    <style>\n" +
                         "        body {\n" +
@@ -205,10 +214,6 @@ public class DeleteServelet extends HttpServlet {
                         "    </style>\n" +
                         "</body>\n" +
                         "</html>";
-
-
-        PrintWriter printWriter = resp.getWriter();
-        printWriter.print(strplannig);
-        printWriter.close();
+        return strplannig;
     }
 }

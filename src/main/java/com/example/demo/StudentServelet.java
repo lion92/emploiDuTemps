@@ -55,38 +55,32 @@ public class StudentServelet extends HttpServlet {
                             String jourIterationActuel = horaireIterationActuelle.getJour();
                             if (jourIterationActuel.equals("Lundi")) {
                                 if (horaireIterationActuelle.heureDebut == debutCours) {
-                                    tdLundi +="<tr>" + "<td>"+"<span>" + debutCours + "</>"+coursIterationActuel.getMatiere() + "</td></tr>";
+                                    tdLundi += "<div>"+"<span>" + debutCours + "Lundi"+"</span>"+coursIterationActuel.getMatiere() +"</div>";
                                 }
                             }
                             if (jourIterationActuel.equals("Mardi")) {
                                 if (horaireIterationActuelle.heureDebut == debutCours) {
-                                    tdLundi += "<tr>" +  "<td>"+"<span>" + debutCours + "</>"+coursIterationActuel.getMatiere() + "</td></tr>";
-                                }
+                                    tdMardi += "<div>"+"<span>" + debutCours +"Mardi"+"</span>"+coursIterationActuel.getMatiere() +"</div>";                                }
                             }
                             if (jourIterationActuel.equals("Mercredi")) {
                                 if (horaireIterationActuelle.heureDebut == debutCours) {
-                                    tdLundi += "<tr>" +  "<td>"+"<span>" + debutCours + "</>"+coursIterationActuel.getMatiere() + "</td></tr>";
-                                }
+                                    tdMercredi += "<div>"+"<span>" + debutCours +"Mercredi"+ "</span>"+coursIterationActuel.getMatiere() +"</div>";                                }
                             }
                             if (jourIterationActuel.equals("Jeudi")) {
                                 if (horaireIterationActuelle.heureDebut == debutCours) {
-                                    tdLundi += "<tr>" +  "<td>"+"<span>" + debutCours + "</>"+coursIterationActuel.getMatiere() + "</td></tr>";
-                                }
+                                    tdJeudi += "<div>"+"<span>" + debutCours +"Jeudi"+ "</span>"+coursIterationActuel.getMatiere() +"</div>";                                }
                             }
                             if (jourIterationActuel.equals("Vendredi")) {
                                 if (horaireIterationActuelle.heureDebut == debutCours) {
-                                    tdLundi += "<tr>" +  "<td>"+"<span>" + debutCours + "</>"+coursIterationActuel.getMatiere() + "</td></tr>";
-                                }
+                                    tdVendredi += "<div>"+"<span>" + debutCours + "Vendredi"+"</span>"+coursIterationActuel.getMatiere() +"</div>";                                }
                             }
                             if (jourIterationActuel.equals("Samedi")) {
                                 if (horaireIterationActuelle.heureDebut == debutCours) {
-                                    tdLundi += "<tr>" +  "<td>"+"<span>" + debutCours + "</>"+coursIterationActuel.getMatiere() + "</td></tr>";
-                                }
+                                    tdSamedi += "<div>"+"<span>" + debutCours +"Samedi"+ "</span>"+coursIterationActuel.getMatiere() +"</div>";                                }
                             }
                             if (jourIterationActuel.equals("Dimanche")) {
                                 if (horaireIterationActuelle.heureDebut == debutCours) {
-                                    tdLundi += "<tr>" +  "<td>"+"<span>" + debutCours + "</>"+coursIterationActuel.getMatiere() + "</td></tr>";
-                                }
+                                    tdDimanche += "<div>"+"<span>" + debutCours + "Dimanche"+"</span>"+coursIterationActuel.getMatiere() +"</div>";                                }
                             }
 
                         }
@@ -114,7 +108,6 @@ public class StudentServelet extends HttpServlet {
                 "<div>\n" +
                 "    <h2>Emploi du temps</h2>\n" +
                 "\n" +
-                "    <div id=\"m1\">\n" +
                 "\n" +
                 "        Voir les matières :\n" +
                 "        <div>\n" +
@@ -128,36 +121,34 @@ public class StudentServelet extends HttpServlet {
                 "            <em>ajouter le bouton projet ici</em>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
-                "\n" +
-                "    <div id=\"t1\">\n" +
-                "        <table>\n" +
-                "            <tr>\n" +
-                "                <th> Lundi </th>\n" +
-                "                <th> Mardi </th>\n" +
-                "                <th> Mercredi </th>\n" +
-                "                <th> Jeudi </th>\n" +
-                "                <th> Vendredi </th>\n" +
-                "                <th> Samedi </th>\n" +
-                "                <th> Dimanche </th>\n" +
-                "            </tr>\n" +
-                "            <tr>\n" +
-                tdLundi +
-                tdMardi+
-                tdMercredi+
-                        tdJeudi+
-                        tdVendredi+
-                        tdSamedi+
-                        tdDimanche+
-                "            </tr>\n" +
-                "        </table>\n" +
-                "    </div>\n" +
+                "\n" +"<div class=\"wrapper\">"
++                        "<div class='retrait'>"+tdLundi+"</div>"+
+
+                        "<div class='retrait'>"+tdMardi+"</div>"+
+
+                        "<div class='retrait'>"+tdMercredi+"</div>"+
+
+                        "<div class='retrait'>"+tdJeudi+"</div>"+
+
+                        "<div class='retrait'>"+tdVendredi+"</div>"+
+
+                        "<div class='retrait'>"+tdSamedi+"</div>"+
+
+                        "<div class='retrait'>"+tdDimanche+"</div>"+
+               "</div>"+
                 "    <style>\n" +
                 "        body {\n" +
                 "            background-color: Azure;\n" +
                 "            font-family: sans-serif;\n" +
                 "            font-size: 90%\n" +
-                "        }\n" +
-                "\n" +
+                "        }\n" +".wrapper {\n" +
+                        "  display: grid;\n" +
+                        " grid-template-columns: repeat(7, 1fr);"+
+                        "}\n"+
+                "\n" +".retrait{" +
+                        "display:flex;" +
+                        "flex-direction:column;" +
+                        "}"+
                 "        h2{\n" +
                 "            color: DarkSlateGray;\n" +
                 "        }\n" +
@@ -213,7 +204,6 @@ public class StudentServelet extends HttpServlet {
                 "            background-color: silver;\n" +
                 "        }\n" +
                 "    </style>\n" +
-                "</div>\n" +
                 "</body>\n" +
                 "</html>";
 

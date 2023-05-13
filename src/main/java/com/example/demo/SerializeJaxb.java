@@ -56,4 +56,32 @@ public class SerializeJaxb {
             e.printStackTrace();
         }
     }
+
+    public static void updateXmlByUsingObject(Planning planning, Cours coursAmodifier) {
+        try {
+            if(planning==null){
+                planning=new Planning();
+            }
+
+            List<Cours> cours = planning.getCours();
+            for(int courIteration=0; courIteration<cours.size();courIteration++){
+                if(cours.get(courIteration).getId()==coursAmodifier.getId()){
+                    Cours cours1 = cours.get(courIteration);
+                    cours1.setHoraire(coursAmodifier.getHoraire());
+                    cours1.setMatiere(coursAmodifier.getMatiere());
+                    break;
+                }
+            }
+
+
+            planning.setCours(cours);
+            JAXBContext jaxbContext1=JAXBContext.newInstance(Planning.class);
+            Marshaller marshaller=jaxbContext1.createMarshaller();
+            marshaller.marshal(planning, new File("C:\\Users\\kriss\\IdeaProjects\\demo\\src\\main\\resources\\testtest.xml"));
+            marshaller.marshal(planning, System.out);
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+    }
 }

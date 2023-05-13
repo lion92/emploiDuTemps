@@ -43,6 +43,14 @@ public class Planning {
 		return Objects.equals(lesCours, planning.lesCours);
 	}
 
+	public List<Cours> getLesCours() {
+		return lesCours;
+	}
+
+	public void setLesCours(List<Cours> lesCours) {
+		this.lesCours = lesCours;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(lesCours);

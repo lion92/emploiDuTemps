@@ -84,4 +84,30 @@ public class SerializeJaxb {
             e.printStackTrace();
         }
     }
+
+    public static void deleteXmlByUsingObject(Planning planning, int idAsupprimer) {
+        try {
+            if(planning==null){
+                planning=new Planning();
+            }
+            Cours cours1=new Cours();
+            List<Cours> cours = planning.getCours();
+            for(int courIteration=0; courIteration<cours.size();courIteration++){
+                if(cours.get(courIteration).getId()==idAsupprimer){
+                     cours1= cours.get(courIteration);
+                    break;
+                }
+            }
+
+
+            planning.getCours().remove(cours1);
+            JAXBContext jaxbContext1=JAXBContext.newInstance(Planning.class);
+            Marshaller marshaller=jaxbContext1.createMarshaller();
+            marshaller.marshal(planning, new File("C:\\Users\\kriss\\IdeaProjects\\demo\\src\\main\\resources\\testtest.xml"));
+            marshaller.marshal(planning, System.out);
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+    }
 }

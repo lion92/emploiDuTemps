@@ -44,6 +44,12 @@ Professeur :<input type="text" name="prof">
 
     <input type="submit" value="register">
 </form>
+
+<form action="<%= request.getContextPath() %>/DeleteServelet" method="post">
+    Id: <input type="text" name="id">
+    <br> <br>
+    <input type="submit" value="register">
+</form>
 <br/>
 <a href="hello-servlet">Hello Servlet</a>
 
